@@ -5,6 +5,7 @@ const mealLoad = () => {
 
     searchField.value = '';
 
+
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`)
         .then(res => res.json())
         .then(data => displayMeals(data.meals))
@@ -13,6 +14,7 @@ const mealLoad = () => {
 
 const displayMeals = meals => {
     const searchResult = document.getElementById('search-result');
+    searchResult.innerText = '';
     meals.forEach(meal => {
         console.log(meal);
 
@@ -23,13 +25,13 @@ const displayMeals = meals => {
         div.innerHTML = `
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="${meal.strMealThumb}" class="img-fluid rounded-start h-100" alt="...">
+                <img src="${meal.strMealThumb}" class="img-fluid rounded-start h-100" />
             </div>
             <div class="col-md-8">
                 <div class="card-body">
                     <h5 class="card-title">${meal.strMeal}</h5>
                     <p class="card-text">${meal.strInstructions.slice(0, 230)}</p>
-                    <a href="" class="btn btn-outline-success">Learn from tutorial</a>
+                    <a href="${meal.strYoutube}" class="btn btn-outline-success" target ="_blank">Learn from tutorial</a>
                 </div>
             </div>
         </div>
