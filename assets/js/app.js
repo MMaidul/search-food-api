@@ -7,14 +7,13 @@ const mealLoad = () => {
     searchField.value = '';
     toggleSpinner('block');
     searchToogler('none');
+    errorDisplay.style.display = 'none';
 
-    if (searchText === '') {
-        alert('Please search your food name')
-    } else {
-        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`)
-            .then(res => res.json())
-            .then(data => displayMeals(data.meals))
-    }
+
+
+    fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`)
+        .then(res => res.json())
+        .then(data => displayMeals(data.meals))
 }
 
 
@@ -24,7 +23,7 @@ const displayMeals = meals => {
     const searchResult = document.getElementById('search-result');
     searchResult.innerText = '';
     if (meals === null) {
-        alert('check')
+        errorDisplay.style.display = 'block';
     } else {
 
         meals?.forEach(meal => {
@@ -49,7 +48,10 @@ const displayMeals = meals => {
             `;
 
             searchResult.appendChild(div);
+            errorDisplay.style.display = 'none';
+
         });
+
     }
 
     toggleSpinner('none');
@@ -73,7 +75,8 @@ const searchToogler = result => {
 
 
 
-
+const errorDisplay = document.getElementById('error-msg');
+errorDisplay.style.display = 'none';
 
 
 
