@@ -1,10 +1,14 @@
+
+const spinner = document.getElementById('spinner');
+spinner.style.display = 'none'
+
 const mealLoad = () => {
 
     const searchField = document.getElementById('search-field');
     const searchText = searchField.value;
 
     searchField.value = '';
-
+    spinner.style.display = 'block';
 
     fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchText}`)
         .then(res => res.json())
@@ -12,7 +16,9 @@ const mealLoad = () => {
 }
 
 
+
 const displayMeals = meals => {
+    spinner.style.display = 'none';
     const searchResult = document.getElementById('search-result');
     searchResult.innerText = '';
     meals.forEach(meal => {
@@ -31,7 +37,7 @@ const displayMeals = meals => {
                 <div class="card-body">
                     <h5 class="card-title">${meal.strMeal}</h5>
                     <p class="card-text">${meal.strInstructions.slice(0, 230)}</p>
-                    <a href="${meal.strYoutube}" class="btn btn-outline-success" target ="_blank">Learn from tutorial</a>
+                    <a href="${meal.strYoutube}" class="btn btn-outline-success" target ="_blank">Learn from Youtube</a>
                 </div>
             </div>
         </div>
@@ -39,5 +45,33 @@ const displayMeals = meals => {
 
         searchResult.appendChild(div);
 
+
     });
-}
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
